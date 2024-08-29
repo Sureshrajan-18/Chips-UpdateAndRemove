@@ -1,0 +1,87 @@
+﻿@page "/"
+
+@using System.ComponentModel.DataAnnotations;
+@using Syncfusion.Blazor.Buttons
+
+<div>
+    <SfChip @ref="chip">
+        <ChipItems>
+            @foreach (var tag in ChipData)
+            {
+                <ChipItem Text="@tag.Name" CssClass="@tag.Name.ToLower()"></ChipItem>
+            }
+        </ChipItems>
+    </SfChip>
+</div>
+
+<div style="display: flex; gap: 10px; padding-top: 35px;">
+    <SfButton Content="UpdateChips" OnClick="AddButtonClick"></SfButton>
+    <SfButton Content="RemoveChips" OnClick="RemoveButtonClick"></SfButton>
+</div>
+
+
+
+@code{
+
+    public SfChip chip;
+
+    public List<TagDto> TagList { get; set; } = new List<TagDto>();
+    public class TagDto
+    {
+        public string Name { get; set; }
+    }
+    public List<TagDto> ChipData { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        TagList.Add(new TagDto
+            {
+                Name = "Jenifer",
+            });
+        TagList.Add(new TagDto
+            {
+                Name = "Amenda",
+            });
+        TagList.Add(new TagDto
+            {
+                Name = "Isabella",
+            });
+        TagList.Add(new TagDto
+            {
+                Name = "James",
+            });
+        ChipData = TagList;
+
+    }
+
+    public async Task AddButtonClick()
+    {
+        string[] tagNamesArray = TagList.Select(tag => tag.Name).ToArray();
+        chip.RemoveChips(tagNamesArray);
+        TagList.Add(new TagDto
+            {
+                Name = "dynamicChip1",
+            });
+        TagList.Add(new TagDto
+            {
+                Name = "dynamicChip2",
+            });
+        TagList.Add(new TagDto
+            {
+                Name = "dynamicChip3",
+            });
+        TagList.Add(new TagDto
+            {
+                Name = "dynamicChip4",
+            });
+       ChipData = TagList;
+    }
+
+    public void RemoveButtonClick()
+    {
+        string[] tagNamesArray = TagList.Select(tag => tag.Name).ToArray();
+        chip.RemoveChips(tagNamesArray);
+    }
+}
