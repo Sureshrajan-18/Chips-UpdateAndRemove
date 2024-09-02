@@ -15,7 +15,7 @@
 </div>
 
 <div style="display: flex; gap: 10px; padding-top: 35px;">
-    <SfButton Content="UpdateChips" OnClick="AddButtonClick"></SfButton>
+    <SfButton Content="UpdateChips" OnClick="UpdateButtonClick"></SfButton>
     <SfButton Content="RemoveChips" OnClick="RemoveButtonClick"></SfButton>
 </div>
 
@@ -56,7 +56,7 @@
 
     }
 
-    public async Task AddButtonClick()
+    public async Task UpdateButtonClick()
     {
         string[] tagNamesArray = TagList.Select(tag => tag.Name).ToArray();
         chip.RemoveChips(tagNamesArray);
